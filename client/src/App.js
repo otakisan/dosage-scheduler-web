@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MedicineSearch from './MedicineSearch';
+import DosageScheduleList from './DosageScheduleList'
 
 class App extends Component {
 
@@ -20,6 +21,9 @@ class App extends Component {
         </p>
         <div className="App-content">
           <MedicineSearch onMedicineClick={this.addFood} />
+        </div>
+        <div className="App-content">
+          <DosageScheduleList onMedicineClick={this.addFood} />
         </div>
       </div>
     );

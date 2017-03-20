@@ -1,5 +1,5 @@
-function search(query, cb) {
-  return fetch(`ormtest?q=${query}`, {
+function search(url, query, cb) {
+  return fetch(`${url}?q=${query}`, {
     accept: 'application/json',
   }).then(checkStatus)
     .then(parseJSON)

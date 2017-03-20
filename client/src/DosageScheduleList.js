@@ -1,14 +1,29 @@
 import React from 'react';
-import Client from './ds-http-client';
+import Client from './ds-dosage-schedule-http-client';
 
 const MATCHING_ITEM_LIMIT = 25;
 
-class MedicineSearch extends React.Component {
-  state = {
-    medicines: [],
-    showRemoveIcon: false,
-    searchValue: '',
-  };
+class DosageScheduleList extends React.Component {
+
+  // propsは、HTML要素の属性値のこと
+  constructor(props) {
+    super(props);
+
+    // stateはクラス内部で管理する状態情報
+    // 値は、setStateメソッド経由で変更する。
+    // 変更すると、renderがコールされる
+    this.state = {
+      medicines: [],
+      showRemoveIcon: false,
+      searchValue: '',
+    };
+  }
+
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
 
   handleSearchChange = (e) => {
     const value = e.target.value;
@@ -27,7 +42,7 @@ class MedicineSearch extends React.Component {
         showRemoveIcon: true,
       });
 
-      Client.search('ormtest', value, (medicines) => {
+      Client.search(value, (medicines) => {
         this.setState({
           medicines: medicines.slice(0, MATCHING_ITEM_LIMIT),
         });
@@ -46,14 +61,16 @@ class MedicineSearch extends React.Component {
   render() {
     const { showRemoveIcon, medicines } = this.state;
     const removeIconStyle = showRemoveIcon ? {} : { visibility: 'hidden' };
-
+    const tdClassNames = ['right', 'aligned'];
+    const tdClassName = tdClassNames.join(' ');
+ 
     const medicineRows = medicines.map((medicine, idx) => (
       <tr
         key={idx}
         onClick={() => this.props.onMedicineClick(medicine)}
       >
         <td></td>
-        <td className='right aligned'>{medicine.id}</td>
+        <td className={tdClassName}>{medicine.id}</td>
         <td className='right aligned'>{medicine.gtin}</td>
         <td className='right aligned'>{medicine.jan_code}</td>
         <td className='right aligned'>{medicine.summary}</td>
@@ -86,7 +103,7 @@ class MedicineSearch extends React.Component {
               </th>
             </tr>
             <tr>
-              <th className='eight wide'>Description</th>
+              <th className='eight wide'>DosageScheduleList</th>
               <th>ID</th>
               <th>GTIN</th>
               <th>JAN</th>
@@ -102,4 +119,4 @@ class MedicineSearch extends React.Component {
   }
 }
 
-export default MedicineSearch;
+export default DosageScheduleList;
