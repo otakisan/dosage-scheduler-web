@@ -1,5 +1,6 @@
 import React from 'react';
 import Client from './ds-dosage-schedule-http-client';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const MATCHING_ITEM_LIMIT = 25;
 
@@ -58,6 +59,10 @@ class DosageScheduleList extends React.Component {
     });
   };
 
+  handleRaisedClick = () => {
+    alert('click!');
+  }
+
   render() {
     const { showRemoveIcon, medicines } = this.state;
     const removeIconStyle = showRemoveIcon ? {} : { visibility: 'hidden' };
@@ -79,6 +84,7 @@ class DosageScheduleList extends React.Component {
 
     return (
       <div id='medicine-search'>
+        <RaisedButton label="Default" onClick={this.handleRaisedClick}/>
         <table className='ui selectable structured large table'>
           <thead>
             <tr>
